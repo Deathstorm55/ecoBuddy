@@ -48,3 +48,7 @@ a{
 p{
     color: #000;
 }
+select{
+    padding: 10px;
+    
+}
