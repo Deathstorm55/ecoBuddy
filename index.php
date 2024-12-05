@@ -54,7 +54,9 @@ session_start();
 
 <nav>
     <a href="browse.php">Browse Data</a>
-    <a href="search.php">Search Data</a>
+    <form action="search.php" method="post" name="search">
+    <input type="text" name="search" placeholder="Search for title, description, category, postcode, address..." required>
+    </form>
     <a href="login.php">Login</a>
 </nav>
 
