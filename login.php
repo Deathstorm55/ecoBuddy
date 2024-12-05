@@ -1,33 +1,28 @@
 <?php
-include 'db_conn.php';
-session_start();
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+	include('db_conn.php');
+	session_start();
+    // If form submitted, insert values into the database.
+    if (isset($_POST['username'])){
+
+		$username = stripslashes($_REQUEST['username']); // removes backslashes
+		$username = mysqli_real_escape_string($conn,$username); //escapes special characters in a string
+		$password = stripslashes($_REQUEST['password']);
+		$password = mysqli_real_escape_string($conn,$password);
 
 
-    // Fetch user record
-    $stmt = $conn->prepare("SELECT `password` FROM ecouser WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($password_hash);
 
-    if ($stmt->num_rows > 0) {
-        $stmt->fetch();
-        if (password_verify($password, $password_hash)) {
-            $_SESSION['username'] = $username;
-            echo '<script type="text/javascript"> window.open("./home/home.php","_self");</script>'; 
-        } else {
-            echo "Invalid password.";
-        }
-    } else {
-        echo "User not found.";
+	//Checking is user existing in the database or not
+        $query = "SELECT * FROM ecouser WHERE username='$username' AND password='$password'";
+		$result = mysqli_query($conn,$query) or die(mysqli_error($conn));
+		$rows = mysqli_num_rows($result);
+        if($rows==1){
+			$_SESSION['username'] = $username;
+			echo '<script type="text/javascript"> window.open("./home/home.php","_self");</script>'; // Redirect user to index.php
+            }{
+    echo "<script>alert('Invalid login credentials ')
+	location.href='./login.php'</script>";
+   }
     }
-
-    $stmt->close();
-    $conn->close();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
