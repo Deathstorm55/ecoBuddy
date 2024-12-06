@@ -68,7 +68,7 @@
                                         </thead>
                                         <tbody>
                                         <?php 
-include('../db_conn.php'); 
+include('./db_conn.php'); 
 
 $sql = "SELECT * FROM ecofacilities ORDER BY `id` ASC";
 
