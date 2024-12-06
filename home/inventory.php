@@ -70,17 +70,8 @@
                                         <tbody>
                                         <?php 
 include('../db_conn.php'); 
-if($_POST){
-$search=$_POST['search'];
 
-$sql = "SELECT * FROM ecofacilities 
-WHERE 
-    `title` LIKE '%".$search."%' 
-    OR `category` LIKE '%".$search."%' 
-    OR `description` LIKE '%".$search."%' 
-    OR `postcode` LIKE '%".$search."%' 
-    OR `streetName` LIKE '%".$search."%';
-";
+$sql = "SELECT * FROM ecofacilities ORDER BY `id` ASC";
 
 $result = mysqli_query($conn, $sql);
 
@@ -100,23 +91,20 @@ if (mysqli_num_rows($result) > 0) {
                                                 <td><?php echo $row['streetName'];?>, <?php echo $row['town']; ?></td>
                                                 <td><?php echo $row['title'];?></td>
                                                 <td><?php echo $row['postcode'];?></td>
-                                                <td><?php echo $rows['statusComment'];?></td>
+                                                <td><?php echo $rows['statusComment'];?></td>    
                                                 <td><div>
                                         <ul class="dropdown-menu">
-                                            <li><a href="update_status.php?id=<?php echo $row['id'];?>">Edit</a>
+                                            <li><a href="./update_status.php?id=<?php echo $row['id'];?>">Edit Status</a>
                                         </li>
                                         </ul>
-                                    </div></td>     
-                                                
+                                    </div></td>
                                             </tr>
                                             <?php  
 }
 }
  }
 }
-}else{
-    echo "<script> alert('no data');</script>";
-}
+
 
 
 ?>

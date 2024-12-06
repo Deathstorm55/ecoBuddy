@@ -33,6 +33,22 @@ include('../db_conn.php');
         nav a:hover {
             text-decoration: underline;
         }
+        form {
+            margin: 15px 0;
+        }
+        form input[type="text"] {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+        form input[type="text"]:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
         footer {
             margin-top: 20px;
             padding: 10px;
@@ -53,8 +69,10 @@ include('../db_conn.php');
 
 <nav>
     <a href="browse.php">Browse Data</a>
-    <a href="search.php">Search Data</a>
-    <a href="login.php">Login</a>
+    <form action="search.php" method="post" name="search">
+    <input type="text" name="search" placeholder="Search for title, description, category, postcode, address..." required>
+    </form>
+    <a href="inventory.php">Inventory</a>
 </nav>
 
 <footer>
