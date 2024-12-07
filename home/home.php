@@ -68,7 +68,6 @@ include('../db_conn.php');
 </header>
 
 <nav>
-    
     <form action="search.php" method="post" name="search">
     <input type="text" name="search" placeholder="Search for title, description, category, postcode, address..." required>
     </form>
