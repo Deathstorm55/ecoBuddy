@@ -44,7 +44,7 @@
                 <label for="password">Enter your Password:</label><br>
                 <input type="password" name="password" id=""><br><br>
                 <button type="submit" name="submit">Login</button><br>
-                <p>not registered? <a href="./"><p>Sign-UP</p></a></p>
+                
             </form>
         </div>
     </div>
