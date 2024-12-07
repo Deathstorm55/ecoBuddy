@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>search</title>
+    <title>Search Results:</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -68,7 +68,7 @@
                                         </thead>
                                         <tbody>
                                         <?php 
-include('../db_conn.php'); 
+include('./db_conn.php'); 
 
 $sql = "SELECT * FROM ecofacilities ORDER BY `id` ASC";
 
