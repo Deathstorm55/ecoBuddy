@@ -1,26 +1,36 @@
-<?php
-    session_start();
-    // If form submitted, insert values into the database.
-    if (isset($_POST['username'])){
+<?php 
+session_start();
+require_once 'db_conn.php'; // Include the Database connection class
 
-		$username = stripslashes($_REQUEST['username']); // removes backslashes
-		$username = mysqli_real_escape_string($conn,$username); //escapes special characters in a string
-		$password = stripslashes($_REQUEST['password']);
-		$password = mysqli_real_escape_string($conn,$password);
+// If form is submitted, process the input
+if (isset($_POST['username'])) {
+    try {
+        // Create a Database object and get the connection
+        $db = new Database();
+        $pdo = $db->getConnection();
 
+        // Retrieve and sanitize user input
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
 
+        // Prepare and execute a query to check user credentials
+        $query = "SELECT * FROM ecouser WHERE username = :username AND password = :password";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute(['username' => $username, 'password' => $password]);
 
-	//Checking is user existing in the database or not
-        $query = "SELECT * FROM ecouser WHERE username='$username' AND password='$password'";
-		$result = mysqli_query($conn,$query) or die(mysqli_error($conn));
-		$rows = mysqli_num_rows($result);
-        if($rows==1){
-			$_SESSION['username'] = $username;
-			header("Location: http://localhost/ecoBuddy/home/home.php"); 
-            exit();// Redirect user to home.php;
-            }{
-        header("Location: http://localhost/ecoBuddy/login.php");
-        exit();
-   }
+        // Check if a user was found
+        if ($stmt->rowCount() === 1) {
+            $_SESSION['username'] = $username;
+            header("Location: http://localhost/ecoBuddy/home/home.php");
+            exit(); // Redirect user to home.php
+        } else {
+            // If no user found, redirect to login page
+            header("Location: http://localhost/ecoBuddy/login.php");
+            exit();
+        }
+    } catch (Exception $e) {
+        // Handle any errors (optional)
+        echo "An error occurred: " . $e->getMessage();
     }
+}
 ?>
