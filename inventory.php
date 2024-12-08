@@ -64,7 +64,6 @@
             <th>Category</th>
             <th>Postcode</th>
             <th>Status</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -105,13 +104,6 @@
                     <td>{$row['title']}</td>
                     <td>{$row['postcode']}</td>
                     <td>{$row['statusComment']}</td>
-                    <td>
-                        <div>
-                            <ul class='dropdown-menu'>
-                                <li><a href='./update_status.php?id={$row['id']}'>Edit Status</a></li>
-                            </ul>
-                        </div>
-                    </td>
                 </tr>";
             }
         } else {
