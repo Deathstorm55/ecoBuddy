@@ -1,7 +1,7 @@
 <?php
-include('session.php');
+require('session.php');
 
-    include('../db_conn.php');
+    require('../db_conn.php');
     $id = 1;
 
     if(isset($_REQUEST['id'])){
@@ -13,7 +13,7 @@ include('session.php');
 
 ?>
 <?php
-    include('../db_conn.php');
+    require('../db_conn.php');
     if(isset($_REQUEST['id'])){
         $sql= "SELECT * FROM ecofacilitystatus WHERE id='$_REQUEST[id]'";
         $result1= mysqli_query($conn, $sql);
@@ -100,14 +100,14 @@ include('session.php');
         <div class="update_form">
             <form method="post">
             <?php
-                    include('../db_conn.php');
+                    require('../db_conn.php');
                     if(isset($_REQUEST['submit'])){
                         
                         $update_status = $_REQUEST['update_status'];
                         $sql="UPDATE ecofacilitystatus SET `statusComment`='$update_status' WHERE facilityId='$id'";
                                             $result=mysqli_query($conn,$sql);
                                             if($result){
-                                                echo "<script>alert('Profile update successfull');location.href='inventory.php'</script>";
+                                                header("Location: http://localhost/ecoBuddy/home/inventory.php");
                                             }
                                             else{
                                                 echo "error updating record".mysqli_error($conn);

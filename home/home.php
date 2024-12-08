@@ -1,6 +1,6 @@
 <?php
-include('session.php');
-include('../db_conn.php');
+require('session.php');
+require('../db_conn.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

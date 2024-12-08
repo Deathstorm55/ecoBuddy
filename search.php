@@ -68,7 +68,7 @@
                                         </thead>
                                         <tbody>
                                         <?php 
-include('./db_conn.php'); 
+require('./db_conn.php'); 
 if($_POST){
 $search=$_POST['search'];
 

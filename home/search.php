@@ -69,7 +69,7 @@
                                         </thead>
                                         <tbody>
                                         <?php 
-include('../db_conn.php'); 
+require('../db_conn.php'); 
 if($_POST){
 $search=$_POST['search'];
 
@@ -115,7 +115,7 @@ if (mysqli_num_rows($result) > 0) {
  }
 }
 }else{
-    echo "<script> alert('no data');</script>";
+    echo "No Results found!!";
 }
 
 
