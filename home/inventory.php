@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>search</title>
+    <title>Search</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,60 +55,75 @@
 </head>
 <body>
 <table>
-                                        <thead>
-                                            <tr>
-                                                <th> Id</th>
-                                                <th>Description</th>
-                                                <th>Category Id</th>
-                                                <th>Address</th>
-                                                <th>Category</th>
-                                                <th>Postcode</th>
-                                                <th>Status</th>
-                                                <th> Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php 
-require('../db_conn.php'); 
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+            <th>Category Id</th>
+            <th>Address</th>
+            <th>Category</th>
+            <th>Postcode</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php 
+    require_once '../db_conn.php'; // Use the Database class for connection
 
-$sql = "SELECT * FROM ecofacilities ORDER BY `id` ASC";
+    try {
+        // Create a Database object and get the PDO connection
+        $db = new Database();
+        $pdo = $db->getConnection();
 
-$result = mysqli_query($conn, $sql);
+        // Fetch all facilities and their statuses using a JOIN query
+        $sql = "
+            SELECT 
+                ef.id, ef.description, ef.category, ef.streetName, ef.town, ef.title, ef.postcode, es.statusComment
+            FROM 
+                ecofacilities ef
+            LEFT JOIN 
+                ecofacilitystatus es
+            ON 
+                ef.id = es.id
+            ORDER BY 
+                ef.id ASC
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
 
-if (mysqli_num_rows($result) > 0) {
- while($row = mysqli_fetch_array($result)){
-    $uid = $row['id'];
-    $query = "SELECT * FROM ecofacilitystatus 
-    WHERE `id`='$uid'";
-    $results = mysqli_query($conn, $query);
-    if(mysqli_num_rows($results)>0){
-        while($rows = mysqli_fetch_array($results)){
-?>  
-                                            <tr class="">
-                                                <td><?php echo $row['id'];?></td>
-                                                <td><?php echo $row['description'];?></td>
-                                                <td><?php echo $row['category']?></td>
-                                                <td><?php echo $row['streetName'];?>, <?php echo $row['town']; ?></td>
-                                                <td><?php echo $row['title'];?></td>
-                                                <td><?php echo $row['postcode'];?></td>
-                                                <td><?php echo $rows['statusComment'];?></td>    
-                                                <td><div>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="./update_status.php?id=<?php echo $row['id'];?>">Edit Status</a>
-                                        </li>
-                                        </ul>
-                                    </div></td>
-                                            </tr>
-                                            <?php  
-}
-}
- }
-}
+        // Fetch all rows and render the table
+        $facilities = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        if (!empty($facilities)) {
+            foreach ($facilities as $row) {
+                echo "<tr>
+                    <td>{$row['id']}</td>
+                    <td>{$row['description']}</td>
+                    <td>{$row['category']}</td>
+                    <td>{$row['streetName']}, {$row['town']}</td>
+                    <td>{$row['title']}</td>
+                    <td>{$row['postcode']}</td>
+                    <td>{$row['statusComment']}</td>
+                    <td>
+                        <div>
+                            <ul class='dropdown-menu'>
+                                <li><a href='./update_status.php?id={$row['id']}'>Edit Status</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>";
+            }
+        } else {
+            echo "<tr><td colspan='8'>No records found.</td></tr>";
+        }
 
-
-?>
-                                            
-                                    </table>
+    } catch (Exception $e) {
+        // Handle errors gracefully
+        echo "<tr><td colspan='8'>An error occurred: " . htmlspecialchars($e->getMessage()) . "</td></tr>";
+    }
+    ?>
+    </tbody>
+</table>
 </body>
 </html>

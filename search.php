@@ -99,7 +99,8 @@ if (mysqli_num_rows($result) > 0) {
                                                 <td><?php echo $row['streetName'];?>, <?php echo $row['town']; ?></td>
                                                 <td><?php echo $row['title'];?></td>
                                                 <td><?php echo $row['postcode'];?></td>
-                                                <td><?php echo $rows['statusComment'];?></td>    
+                                                <td><?php echo $rows['statusComment'];?></td>
+                                                 
                                                 
                                             </tr>
                                             <?php  
@@ -108,7 +109,7 @@ if (mysqli_num_rows($result) > 0) {
  }
 }
 }else{
-    echo "<script> alert('no data');</script>";
+    echo "No Results found!!";
 }
 
 
