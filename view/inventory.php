@@ -69,7 +69,7 @@
     </thead>
     <tbody>
     <?php 
-    require_once '../db_conn.php'; // Use the Database class for connection
+    require_once '../config/db_conn.php'; // Use the Database class for connection
 
     try {
         // Create a Database object and get the PDO connection

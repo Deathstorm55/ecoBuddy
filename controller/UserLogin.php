@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once 'db_conn.php'; // Include the Database connection class
+// require_once '../config/db_conn.php'; // Include the Database connection class
 
 // If form is submitted, process the input
 if (isset($_POST['username'])) {
@@ -21,7 +21,7 @@ if (isset($_POST['username'])) {
         // Check if a user was found
         if ($stmt->rowCount() === 1) {
             $_SESSION['username'] = $username;
-            header("Location: http://localhost/ecoBuddy/home/home.php");
+            header("Location: http://localhost/ecoBuddy/view/home.php");
             exit(); // Redirect user to home.php
         } else {
             // If no user found, redirect to login page

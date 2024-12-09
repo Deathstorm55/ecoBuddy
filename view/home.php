@@ -1,6 +1,6 @@
 <?php
-require_once('session.php');
-require_once('../db_conn.php');
+require_once('../controller/session.php');
+require_once('../config/db_conn.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,10 +68,10 @@ require_once('../db_conn.php');
 </header>
 
 <nav>
-    <form action="search.php" method="post" name="search">
+    <form action="./search.php" method="post" name="search">
     <input type="text" name="search" placeholder="Search for title, description, category, postcode, address..." required>
     </form>
-    <a href="inventory.php">Inventory</a>
+    <a href="./inventory.php">Inventory</a>
 </nav>
 
 <footer>

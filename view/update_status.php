@@ -1,32 +1,7 @@
 <?php
-require_once('session.php');
-require_once('../db_conn.php'); // Include the Database class
-
-// Initialize the Database class
-$db = new Database();
-$pdo = $db->getConnection();
-
-// Fetch the user details based on the `id` parameter
-$id = 1; // Default ID, replace with dynamic logic if necessary
-$userData = [];
-
-if (isset($_REQUEST['id'])) {
-    $id = $_REQUEST['id'];
-
-    // Fetch user data
-    $stmt = $pdo->prepare("SELECT * FROM ecouser WHERE id = :id");
-    $stmt->execute(['id' => $id]);
-    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-// Fetch the facility status based on the `id` parameter
-$facilityData = [];
-if (isset($_REQUEST['id'])) {
-    $stmt = $pdo->prepare("SELECT * FROM ecofacilitystatus WHERE id = :id");
-    $stmt->execute(['id' => $_REQUEST['id']]);
-    $facilityData = $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
+require_once('../controller/session.php');
+require_once('../config/db_conn.php'); // Include the Database class
+require_once('../controller/FacilityController.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -106,22 +81,7 @@ if (isset($_REQUEST['id'])) {
             <form method="post">
                 <?php
                 // Update facility status
-                if (isset($_POST['submit'])) {
-                    $update_status = $_POST['update_status'];
-
-                    try {
-                        $stmt = $pdo->prepare("UPDATE ecofacilitystatus SET statusComment = :statusComment WHERE facilityId = :facilityId");
-                        $stmt->execute([
-                            'statusComment' => $update_status,
-                            'facilityId' => $id,
-                        ]);
-
-                        header("Location: http://localhost/ecoBuddy/home/inventory.php");
-                        exit();
-                    } catch (PDOException $e) {
-                        echo "Error updating record: " . htmlspecialchars($e->getMessage());
-                    }
-                }
+                require_once('../Model/Facility.php');
                 ?>
                 <label for="update_status">Update your value</label>
                 <select name="update_status" id="update_status" required>

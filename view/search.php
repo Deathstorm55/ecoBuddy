@@ -69,7 +69,7 @@
     </thead>
     <tbody>
         <?php
-        require_once('./config/db_conn.php');
+        require_once('../config/db_conn.php');
 
         try {
             // Initialize database connection

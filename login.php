@@ -1,6 +1,6 @@
 <?php
-	require('./db_conn.php');
-	require('./script.php');
+	require_once('./config/db_conn.php');
+	require_once('./controller/UserLogin.php');
     
 ?>
 <!DOCTYPE html>
