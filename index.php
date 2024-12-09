@@ -69,11 +69,11 @@ session_start();
 </header>
 
 <nav>
-    <form action="search.php" method="post" name="search">
+    <form action="./view/search.php" method="post" name="search">
     <input type="text" name="search" placeholder="Search for title, description, category, postcode, address..." required>
     </form>
-    <a href="login.php">Login</a>
-    <a href="inventory.php">Inventory</a>
+    <a href="./view/login.php">Login</a>
+    <a href="./view/inventory.php">Inventory</a>
 </nav>
 
 <footer>

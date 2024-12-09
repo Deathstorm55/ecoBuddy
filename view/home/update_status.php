@@ -1,7 +1,7 @@
 <?php
-require_once('../controller/session.php');
-require_once('../config/db_conn.php'); // Include the Database class
-require_once('../controller/FacilityController.php');
+require_once('../../controller/session.php');
+require_once('../../Model/db_conn.php'); // Include the Database class
+require_once('../../controller/FacilityController.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +81,7 @@ require_once('../controller/FacilityController.php');
             <form method="post">
                 <?php
                 // Update facility status
-                require_once('../Model/Facility.php');
+                require_once('../../Model/Facility.php');
                 ?>
                 <label for="update_status">Update your value</label>
                 <select name="update_status" id="update_status" required>

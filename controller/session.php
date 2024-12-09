@@ -1,5 +1,5 @@
 <?php
-require_once '../config/db_conn.php'; // Ensure this file is included only once
+require_once '../../Model/db_conn.php'; // Ensure this file is included only once
 
 session_start();
 

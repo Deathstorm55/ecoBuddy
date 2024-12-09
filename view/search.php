@@ -64,12 +64,11 @@
             <th>Category</th>
             <th>Postcode</th>
             <th>Status</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
         <?php
-        require_once('../config/db_conn.php');
+        require_once('../Model/db_conn.php');
 
         try {
             // Initialize database connection
@@ -116,13 +115,7 @@
                                     <td><?php echo htmlspecialchars($row['title']); ?></td>
                                     <td><?php echo htmlspecialchars($row['postcode']); ?></td>
                                     <td><?php echo htmlspecialchars($statusRow['statusComment']); ?></td>
-                                    <td>
-                                        <div>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="update_status.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
+                            
                                 </tr>
                                 <?php
                             }

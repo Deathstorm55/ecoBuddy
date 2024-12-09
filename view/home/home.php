@@ -1,6 +1,6 @@
 <?php
-require_once('../controller/session.php');
-require_once('../config/db_conn.php');
+require_once('../../controller/session.php');
+require_once('../../Model/db_conn.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

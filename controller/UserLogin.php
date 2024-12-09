@@ -21,11 +21,11 @@ if (isset($_POST['username'])) {
         // Check if a user was found
         if ($stmt->rowCount() === 1) {
             $_SESSION['username'] = $username;
-            header("Location: http://localhost/ecoBuddy/view/home.php");
+            header("Location: http://localhost/ecoBuddy/view/home/home.php");
             exit(); // Redirect user to home.php
         } else {
             // If no user found, redirect to login page
-            header("Location: http://localhost/ecoBuddy/login.php");
+            header("Location: http://localhost/ecoBuddy/view/login.php");
             exit();
         }
     } catch (Exception $e) {

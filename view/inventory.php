@@ -64,12 +64,11 @@
             <th>Category</th>
             <th>Postcode</th>
             <th>Status</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
     <?php 
-    require_once '../config/db_conn.php'; // Use the Database class for connection
+    require_once '../Model/db_conn.php'; // Use the Database class for connection
 
     try {
         // Create a Database object and get the PDO connection
@@ -105,13 +104,6 @@
                     <td>{$row['title']}</td>
                     <td>{$row['postcode']}</td>
                     <td>{$row['statusComment']}</td>
-                    <td>
-                        <div>
-                            <ul class='dropdown-menu'>
-                                <li><a href='./update_status.php?id={$row['id']}'>Edit Status</a></li>
-                            </ul>
-                        </div>
-                    </td>
                 </tr>";
             }
         } else {
