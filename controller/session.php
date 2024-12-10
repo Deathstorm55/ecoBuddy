@@ -33,6 +33,7 @@ try {
 
     // Store session-specific details
     $session_fullname = $row['username'];
+    $session_id = $row['userType'];
 
 } catch (Exception $e) {
     // Log errors (optional) and redirect to the login page

@@ -119,10 +119,12 @@
                                     <td>
                                         <div>
                                             <ul class="dropdown-menu">
-                                                <li><a href="update_status.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit Status</a></li>
+                                                <li><a href="../home/update_status.php?id=<?php echo htmlspecialchars($row['id']); ?>">Edit</a></li>
+                                                <li><a href="../../controller/DeleteFacility.php?id=<?php echo htmlspecialchars($row['id']); ?>">Delete</a></li>
                                             </ul>
                                         </div>
                                     </td>
+                            
                                 </tr>
                                 <?php
                             }

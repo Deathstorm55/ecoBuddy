@@ -1,14 +1,13 @@
 <?php
-// Start the session
-session_start();
+require_once('../../controller/session.php');
+require_once('../../Model/db_conn.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to EcoBuddy</title>
+    <title>Welcome <?php echo $session_fullname; ?></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,24 +61,22 @@ session_start();
     </style>
 </head>
 <body>
-
 <header>
+    <h1>Dear <?php echo $session_fullname; ?></h1>
     <h1>Welcome to Our EcoBuddy!</h1>
     <p>Your one-stop platform for managing data efficiently.</p>
 </header>
 
 <nav>
-    <form action="./view/search.php" method="post" name="search">
+    <form action="./search.php" method="post" name="search">
     <input type="text" name="search" placeholder="Search for title, description, category, postcode, address..." required>
     </form>
-    <a href="./view/login.php">User Login</a>
-    <a href="./view/admin_login.php">Admin Login</a>
-    <a href="./view/inventory.php">Inventory</a>
+    <a href="./inventory.php">Inventory</a>
+    <a href="./create_facility.php">Create Facility</a>
 </nav>
 
 <footer>
     <p>&copy; <?php echo date("Y"); ?> EcoBuddy. All rights reserved.</p>
 </footer>
-
 </body>
 </html>
