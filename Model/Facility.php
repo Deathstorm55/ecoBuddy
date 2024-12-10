@@ -9,7 +9,7 @@
                 'facilityId' => $id,
             ]);
 
-            header("Location: http://localhost/ecoBuddy/view/home/inventory.php");
+            header("Location: /view/home/inventory.php");
             exit();
         } catch (PDOException $e) {
             echo "Error updating record: " . htmlspecialchars($e->getMessage());
