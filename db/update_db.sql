@@ -12,7 +12,7 @@ CREATE TABLE `ecocategories` (
 CREATE TABLE `ecofacilities` (
   `id` int(32) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `title` varchar(50) DEFAULT NULL,
-  `category` int(32) DEFAULT NULL,
+  `category` int(32) UNSIGNED DEFAULT NULL,
   `description` varchar(150) DEFAULT NULL,
   `houseNumber` varchar(50) DEFAULT NULL,
   `streetName` varchar(50) DEFAULT NULL,
@@ -21,7 +21,9 @@ CREATE TABLE `ecofacilities` (
   `postcode` varchar(7) DEFAULT NULL,
   `lng` double DEFAULT NULL,
   `lat` double DEFAULT NULL,
-  `contributor` int(32) DEFAULT NULL
+  `contributor` int(32) UNSIGNED DEFAULT NULL,
+  FOREIGN KEY (`category`) REFERENCES `ecocategories`(`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  FOREIGN KEY (`contributor`) REFERENCES `ecouser`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -30,7 +32,8 @@ CREATE TABLE `ecofacilities` (
 CREATE TABLE `ecofacilitystatus` (
   `id` int(32) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `statusComment` varchar(100) DEFAULT NULL,
-  `facilityId` int(32) DEFAULT NULL
+  `facilityId` int(32) UNSIGNED DEFAULT NULL,
+  FOREIGN KEY (`facilityId`) REFERENCES `ecofacilities`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -40,7 +43,8 @@ CREATE TABLE `ecouser` (
   `id` int(32) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `userType` int(10) DEFAULT NULL
+  `userType` int(10) UNSIGNED DEFAULT NULL,
+  FOREIGN KEY (`userType`) REFERENCES `ecousertypes`(`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
